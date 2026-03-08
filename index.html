@@ -1,37 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribute to Women's Day</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartão Inspirador - Natachi Sayumi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 {
-            color: #9b59b6;
+
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
         }
-        p {
-            font-size: 1.2em;
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: var(--font-sans);
+            background: #ffffff;
+            color: #333333;
         }
-        .tribute {
-            border: 2px solid #9b59b6;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        .container {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background com imagem de flores */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663054259572/GUy9g8NNDsvMDmGn475zLV/cartao-flores_45a2ac63.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(1.05) contrast(1.1);
+            z-index: 1;
+        }
+
+        /* Overlay suave */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 100%
+            );
+            z-index: 2;
+        }
+
+        /* Conteúdo principal */
+        .content {
+            position: relative;
+            z-index: 3;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Card com mensagem */
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 3rem;
+            max-width: 42rem;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            position: relative;
+        }
+
+        /* Decoração superior */
+        .decoration-top {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .decoration-line {
+            width: 3rem;
+            height: 0.25rem;
+            border-radius: 9999px;
+            background: linear-gradient(
+                to right,
+                #fda4af,
+                #fb7185,
+                #fed7aa
+            );
+        }
+
+        /* Mensagem inspiradora */
+        .message {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.875rem;
+            font-weight: 400;
+            color: #1f2937;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Decoração inferior */
+        .decoration-bottom {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.125rem;
+            font-weight: 300;
+            color: #374151;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+
+        .footer-subtitle {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            margin: 0.5rem 0 0 0;
+        }
+
+        /* Responsivo - Tablet */
+        @media (min-width: 768px) {
+            .card {
+                padding: 4rem;
+            }
+
+            .message {
+                font-size: 2rem;
+            }
+
+            .footer-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Responsivo - Desktop */
+        @media (min-width: 1024px) {
+            .card {
+                padding: 5rem;
+            }
+
+            .message {
+                font-size: 2.25rem;
+            }
+
+            .footer-title {
+                font-size: 1.375rem;
+            }
+        }
+
+        /* Efeito de profundidade - sombra adicional */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                transparent,
+                rgba(0, 0, 0, 0.03)
+            );
+            border-radius: 1rem;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="tribute">
-        <h1>Happy International Women's Day!</h1>
-        <p>This day is dedicated to celebrating the achievements and contributions of women around the world.</p>
-        <p>We honor the strong, resilient, and inspiring women who make a difference in our lives every day.</p>
-        <p>Let’s continue to support gender equality and empowerment for all women!</p>
+    <div class="container">
+        <!-- Background -->
+        <div class="background"></div>
+        <div class="overlay"></div>
+
+        <!-- Conteúdo Principal -->
+        <div class="content">
+            <div class="card">
+                <!-- Decoração Superior -->
+                <div class="decoration-top">
+                    <div class="decoration-line"></div>
+                </div>
+
+                <!-- Mensagem Inspiradora -->
+                <p class="message">
+                    "Uma mulher inspiradora é aquela que carrega no sorriso a prova de que pode vencer qualquer desafio. Você é luz!"
+                </p>
+
+                <!-- Decoração Inferior -->
+                <div class="decoration-bottom">
+                    <div class="decoration-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p class="footer-title">Copyright © Full-Stack Natachi Sayumi</p>
+            <p class="footer-subtitle">Inspiração que transforma vidas</p>
+        </footer>
     </div>
 </body>
 </html>
