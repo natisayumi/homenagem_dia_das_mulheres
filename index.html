@@ -1,41 +1,299 @@
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribute to Women's Day</title>
+    <title>Homenagem Dia da Mulher</title>
     <style>
+        /* Estilização Geral */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fef9fb 0%, #fff5f8 100%); /* Gradiente mais claro */
+            color: #5a3d4a;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 { 
+            color: #d63384;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #8b5a7a;
+            font-weight: 500;
+        }
+
+        /* Contentor dos Cards */
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
             padding: 20px;
+            margin-bottom: 40px;
         }
-        h1 {
-            color: #9b59b6;
+
+        .card-trigger {
+            background: linear-gradient(135deg, #ffffff 0%, #fff8fc 100%);
+            border: 3px solid #ffc1e3;
+            border-radius: 15px;
+            padding: 30px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(214, 51, 132, 0.15);
+            text-align: center;
+            min-width: 160px;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            color: #5a3d4a;
         }
-        p {
-            font-size: 1.2em;
+
+        /* Efeito de "clicável" - indicador visual */
+        .card-trigger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 193, 227, 0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        .tribute {
-            border: 2px solid #9b59b6;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        .card-trigger:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, #fff0f6 0%, #ffe8f5 100%);
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.25);
+            border-color: #ff85c0;
+        }
+
+        .card-trigger:hover::before {
+            opacity: 1;
+        }
+
+        .card-trigger span {
+            font-size: 50px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* Indicador de interatividade */
+        .card-trigger::after {
+            content: '👆 Clique';
+            position: absolute;
+            bottom: 5px;
+            right: 8px;
+            font-size: 0.7em;
+            color: #d63384;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: bold;
+            background: rgba(255, 193, 227, 0.8);
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+
+        .card-trigger:hover::after {
+            opacity: 1;
+        }
+
+        /* Estilo do Modal */
+        .modal {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #fff8fc 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            border: 5px solid #ffc1e3;
+            animation: fadeIn 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .flower-icon { 
+            font-size: 60px; 
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .modal-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #5a3d4a;
+            margin: 20px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #d63384;
+            transition: all 0.3s ease;
+            background: rgba(255, 193, 227, 0.3);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .close-btn:hover {
+            background: rgba(214, 51, 132, 0.2);
+            transform: rotate(90deg);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8d7da 0%, #fce4ec 100%);
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #5a3d4a;
+            border-top: 2px solid #ffc1e3;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-30px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .card-trigger {
+                min-width: 140px;
+                padding: 25px 20px;
+            }
+
+            .modal-content {
+                max-width: 90%;
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="tribute">
-        <h1>Happy International Women's Day!</h1>
-        <p>This day is dedicated to celebrating the achievements and contributions of women around the world.</p>
-        <p>We honor the strong, resilient, and inspiring women who make a difference in our lives every day.</p>
-        <p>Let’s continue to support gender equality and empowerment for all women!</p>
+
+    <header>
+        <h1>🌸 Feliz Dia da Mulher 🌸</h1>
+        <p>Clique nos botões abaixo para ler uma mensagem especial.</p>
+    </header>
+
+    <div class="container">
+        <div class="card-trigger" onclick="openModal('modal1')">
+            <span>🌸</span>
+            Mensagem de Força
+        </div>
+        <div class="card-trigger" onclick="openModal('modal2')">
+            <span>🌹</span>
+            Mensagem de Inspiração
+        </div>
+        <div class="card-trigger" onclick="openModal('modal3')">
+            <span>🌷</span>
+            Mensagem de Amor
+        </div>
     </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal1')">&times;</button>
+            <div class="flower-icon">🌸</div>
+            <p>"Que a tua força seja como a das flores, que mesmo delicadas, têm a coragem de florescer a cada primavera. Parabéns pelo seu dia!"</p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal2')">&times;</button>
+            <div class="flower-icon">🌹</div>
+            <p>"Uma mulher inspiradora é aquela que carrega no sorriso a prova de que pode vencer qualquer desafio. Você é luz!"</p>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal3')">&times;</button>
+            <div class="flower-icon">🌷</div>
+            <p>"O mundo é mais bonito porque você faz parte dele. Que hoje o seu coração transborde o amor e o respeito que você merece."</p>
+        </div>
+    </div>
+
+    <footer>
+        Copyright &copy; Natachi Sayumi deseja a todas vocês
+    </footer>
+
+    <script>
+        // Função para abrir o modal
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = "flex";
+            modal.classList.add('show');
+        }
+
+        // Função para fechar o modal
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = "none";
+            modal.classList.remove('show');
+        }
+
+        // Fechar se o usuário clicar fora da caixa branca
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                event.target.classList.remove('show');
+            }
+        }
+    </script>
 </body>
 </html>
